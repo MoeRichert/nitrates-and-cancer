@@ -1,0 +1,108 @@
+
+#body {
+    margin: 0;
+    padding: 0;
+    background: "whitesmoke";
+    font-family: "Noto Sans", sans-serif;
+    color: #3d3d3d;
+	}
+#h3 {
+    font-family: "Noto Sans", sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+    text-align: center;
+    margin: 0;
+}
+	
+#wrapper {
+    width: 960px;
+	margin: 15px auto;
+	}
+
+
+#map {
+    height: 500px;
+	margin: 15px auto;
+	}
+
+#side-panel {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    width: 280px;
+    margin: 20px auto;
+    padding: 0 15px;
+    background: rgba(256, 256, 256, .8);
+    border: 1px solid grey;
+    border-radius: 3px;
+    z-index: 800;
+    }
+
+        p {
+            font-size: .9em;
+            line-height: 1.5em;
+        }
+
+        a {
+            color: #005daa;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+.submit-Control {
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+	padding: 10px;
+	width: 300px;
+    font-size: 14px;
+}
+
+.my-popup {
+	pointer-events: none;
+}
+.my-popup .leaflet-popup-tip {
+	background: rgba(0, 0, 0, 0) !important;
+	box-shadow: none !important;
+}
+.my-popup .leaflet-popup-content-wrapper {
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+	padding: 0px;
+	border-radius: 2px;
+}
+#legend-panel{
+    position:sticky;
+    bottom:0;
+    margin:auto;
+    
+}
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+	border: 2px solid rgba(1, 1, 1, 0.2);
+	font-weight: bold;
+}
+.legend {
+    text-align: left;
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+.legend .colorcircle {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin-top: 0px;
+}

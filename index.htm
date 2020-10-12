@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Cancer and Nitrate Occurance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/css/style-wide.css">
+    <link rel="stylesheet" href="lib/css/style.css">
+    <script src="lib/js/jquery.min.js"></script>
+    <script src='https://unpkg.com/simple-statistics@7.3.0/dist/simple-statistics.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.0/math.min.js"></script>
+    <script src="lib/js/turf/turf_idw.min.js"></script>
+    <script src="lib/js/turf/turf.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="lib/js/leaflet/leaflet-idw.js"> </script>
+    <script src="lib/js/leaflet-easyprint/dist/bundle.js"></script>
+    <script src="lib/js/init.js"></script>
+    <script src="lib/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="lib/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="lib/css/leaflet.css">
+		
+		<!--stylesheets-->
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html"><img src=img/MRP.jpg></a>
+                </div>
+                <div class="btn-group">
+                <div class="btn-group">
+                <a class="btn-sm" href="index.htm">
+                    
+                    Home
+                    </a>
+                </div>
+                <div class="btn-group">
+                <a class="btn-sm" href="About.html">
+                    
+                    About
+                    </a>
+                </div>
+                
+
+            </div>
+            </div>
+                
+        </nav>  
+        
+        <div class="container">
+
+        <h1 class="font-weight-light text-center mt-4 mb-0">Cancer and Nitrate Spatial Comparison</h1>
+        </div>
+        
+		<div id="wrapper">
+			<div id="map"></div>
+		</div>
+			
+            
+
+    <section id="side-panel">
+
+        <p>Well nitrate data and Cancer data are compared via regression to show the correlation between the two.</p>
+        <p>For more information about the data and analysis, click <a href="About.html">HERE</a>.</p>
+        
+        <p>Please select a resolution in kilometers, and a distance-decay weight for the well data interpolation.</p>
+        <form id="calcForm">Interpolation Hexbin Size: <strong><span id="areaVal"></span></strong>
+            <br><input type="range" min="6" max="94" value="6" class="slider" id="binArea" onchange="updatehexUI(this.value);">
+            <br>Distance Decay Weight: <strong><span id="decayVal"></span></strong>
+            <br><input type="range" min="2" max="100" value="2" class="slider" id="distDecay" onchange="updatedecayUI(this.value);"></form>
+        <button id="calculate" class="startbtn" type="button">Calculate Surface</button>
+        <p><button id="runregression" class="btn btn-success btn-sm" type="button">Run Regression</button><button id="refresh" class="btn btn-secondary btn-sm" type="button">Refresh All</button></p>
+        
+        <div id="equation"></div>
+
+    </section>
+    
+
+    <script type="text/javascript" src="main.js"></script> 
+
+
+</body>
+
+</html>

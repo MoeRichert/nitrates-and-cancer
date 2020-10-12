@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Cancer and Nitrate Occurance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/css/style-wide.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="lib/css/leaflet.css">
+		<link rel="stylesheet" href="lib/css/style.css">
+		
+		<!--stylesheets-->
+
+</head>
+
+<body>
+    
+    
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html"><img src=img/MRP.jpg></a>
+            </div>
+            <div class="btn-group">
+                <div class="btn-group">
+                    <button class="btn-sm" href="index.html" type="button">
+                        Home
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button class="btn-sm" href="About.html" type="button">
+                        About
+                    </button>
+                </div>
+            </div>
+        </div>      
+    </nav>
+    
+    <div id=wrapper>
+        
+        <h1>What does this website do??</h1>
+
+        <p>High nitrate concentrations in drinking water has been recently connected to cancer risk in adults.  This map allows you to visualize data collected by the Wisconsin Department of Natural Resources on well nitrate concentrations and cancer occurances over a 10-year period.</p>
+
+        <p>You can explore this data through spatial analysis.  This application uses Inverse Distance Weighted spatial interpolation and Ordinary Least Squares linear regression to analyze the relationship.  To adjust the parameters of the analysis, select a distance decay coefficient (q) to use for the spatial interpolation and the hexbin size (in square kilometers).</p>
+
+        <p><b>Distance Decay Coefficient - </b> This variable determines how rapidly the interaction between two observations declines as the distance between them increases. The larger the distance decay coefficient, the quicker the weight of a sampled value decreases.</p>
+
+        <p><b>Hexbin Size -</b> This selects the area of the hexbin in square kilometers. Smaller hexbins provide a more detailed analysis, but take longer to process.</p>
+
+        <p><a href="index.htm">Return to the Map</a></p>
+        
+    </div>
+    
+    </body>
+</html>
