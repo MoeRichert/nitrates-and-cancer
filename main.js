@@ -24,6 +24,7 @@ var legend2 = new (L.Control.extend({
 // Initialize global variables for data layers
 var censusTracts,
     wellPoints,
+    censusGrid,
     wellPointsTurf,
     hexGrid,
     cancertract_hexgrid,
@@ -217,10 +218,11 @@ function getData(map){
     
     // load the cancer tract data 
     var ctd = $.getJSON("data/cancer_tracts.geojson"),
-        wn = $.getJSON("data/well_nitrate.geojson");
+        wn = $.getJSON("data/well_nitrate.geojson"),
+        cd = $.getJSON("data/cancergrid5.geojson");
     
     //call function responses
-    $.when(ctd, wn).then(function (response1, response2) {
+    $.when(ctd, wn, cd).then(function (response1, response2, response3) {
      //You have both responses at this point.
        
         // create layer and add to the layer group
@@ -307,10 +309,16 @@ function getData(map){
         //draw legend for the well points
         wellLegend = createLegends(wBreaks, blueScheme, headingwell, unitwell);
         
+        // create grid layer for interpolation
+        censusGrid = L.geoJson(response3, {
+            style: style,
+            onEachFeature: onEachFeature
+        });
+    
         
         censusLayer.addTo(map);
         wellLayer.addTo(map);
-    
+        
 });
     
     
@@ -411,31 +419,28 @@ function interpolateData (ddC, hexA){
     
     ////////////////////////census tracts interpolation
     
-    var censusTractsArray = [];
+    var censusArray = [];
     
     // Loop through each census tract feature and build a Turf feature collection from its centroid
-    censusTracts.eachLayer(function (layer) {
+    censusGrid.eachLayer(function (layer) {
 
         // Create shorthand variables to access the layer properties and coordinates
         var props = layer.feature.properties;
-        var coordinates = layer.feature.geometry.coordinates;
-
-        // Create a Turf polygon feature for the census tract, with its coordinates and attributes
-        censusTractsFeature = turf.polygon(coordinates, props);
+        var coords = layer.feature.geometry.coordinates;
 
         // Get the centroid of the census tract
-        var censusTractsCentroidFeature = turf.centroid(censusTractsFeature, props);
+        var censusPts = turf.point(coords, props);
 
         // Push the current census tract centroid into an array
-        censusTractsArray.push(censusTractsCentroidFeature);
+        censusArray.push(censusPts);
 
     });
 
     // Create a Turf feature collection from the array of census tract centroid features
-    censusTractCentroidsTurf = turf.featureCollection(censusTractsArray);
+    censusTurf = turf.featureCollection(censusArray);
     
     var options = {gridType: 'hex', property: 'canrate', units: 'kilometers'};
-    cancerTurf = turf.interpolate(censusTractCentroidsTurf, hexbinArea, options);
+    cancerTurf = turf.interpolate(censusTurf, hexbinArea, options);
     
     var gridToPoint = [];
     
@@ -476,29 +481,6 @@ function interpolateData (ddC, hexA){
 };
 
 function joinFeatures(distanceDecayCoefficient, hexbinArea) {
-    
-    var censusTractsArray = [];
-
-    // Loop through each census tract feature and build a Turf feature collection from its centroid
-    censusTracts.eachLayer(function (layer) {
-
-        // Create shorthand variables to access the layer properties and coordinates
-        var props = layer.feature.properties;
-        var coordinates = layer.feature.geometry.coordinates;
-
-        // Create a Turf polygon feature for the census tract, with its coordinates and attributes
-        censusTractsFeature = turf.polygon(coordinates, props);
-
-        // Get the centroid of the census tract
-        var censusTractsCentroidFeature = turf.centroid(censusTractsFeature, props);
-
-        // Push the current census tract centroid into an array
-        censusTractsArray.push(censusTractsCentroidFeature);
-
-    });
-
-    // Create a Turf feature collection from the array of census tract centroid features
-    censusTractCentroidsTurf = turf.featureCollection(censusTractsArray);
 
     // Set options for the cancer rate interpolation by grid points
     var gridOptions = {
@@ -509,7 +491,7 @@ function joinFeatures(distanceDecayCoefficient, hexbinArea) {
     };
 
     // Interpolate the cancer rate centroids into a surface of grid points (http://turfjs.org/docs#interpolate)
-    cancerRatesGridPointsTurf = turf.interpolate(censusTractCentroidsTurf, hexbinArea, gridOptions);
+    cancerRatesGridPointsTurf = turf.interpolate(censusTurf, hexbinArea, gridOptions);
 
     // Use the collect function to join the cancer rates from the cancer rate grid points to the nitrate concentration hexbins (http://turfjs.org/docs/#collect)
     collectedFeaturesHexbinsTurf = turf.collect(nitrateRatesHexbinsTurf, cancerRatesGridPointsTurf, 'canrate', 'values');
@@ -792,6 +774,5 @@ function init(){
     	globalMap.flyTo([43.78, -88.78], 5.5); //[lat, lng], zoom
     });
 };
-
 
 
