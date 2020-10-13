@@ -296,7 +296,7 @@ function getData(map){
         
         wellPoints.eachLayer(function(layer) {
             layer.setStyle({
-                fillColor: getColor(layer.feature.properties.nitr_ran, wBreaks, blueScheme)
+                fillColor: getColor(layer.feature.properties.nitr_ran, wBreaks, purpleScheme)
             });
             var popup = "<b>Nitrate Concentration: </b>" + layer.feature.properties.nitr_ran.toFixed(2) + " ppm";
             layer.bindPopup(popup);
@@ -307,7 +307,7 @@ function getData(map){
             unitwell = "ppm";
         
         //draw legend for the well points
-        wellLegend = createLegends(wBreaks, blueScheme, headingwell, unitwell);
+        wellLegend = createLegends(wBreaks, purpleScheme, headingwell, unitwell);
         
         // create grid layer for interpolation
         censusGrid = L.geoJson(response3, {
