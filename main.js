@@ -1,14 +1,21 @@
 var map;
 
 // Credits for map located on bottom right of map
-var mbAttr = 'Map created by: Moe Richert';
 
-var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGZpZWxkMjMiLCJhIjoiY2p4NThuaGYxMDB3bDQ4cXd0eWJiOGJoeSJ9.T94xCeDwJ268CmzfMPXdmw';
 
 // Basemap options located on top right of map
-var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
-    dark  = L.tileLayer(mbUrl, {id: 'mapbox.dark',   attribution: mbAttr}),
-    outdoors = L.tileLayer(mbUrl, {id: 'mapbox.outdoors',   attribution: mbAttr});
+var grayscale   = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+	maxZoom: 20,
+	attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+}),
+    dark  = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+	maxZoom: 20,
+	attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+}),
+    outdoors = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
 
 //Legend div in bottom right of map
 var legend = new (L.Control.extend({
@@ -18,7 +25,6 @@ var legend = new (L.Control.extend({
 var legend2 = new (L.Control.extend({
      options: { position: 'bottomright' }
     }));
-
 
 
 // Initialize global variables for data layers
@@ -55,7 +61,7 @@ var orangeScheme = ['#fdd49e', '#fdbb84', '#fc8d59', '#ef6548', '#d7301f', '#990
     blueScheme = ['#eff4ff', '#c6dbef', '#9ecae1', '#6baed6', '#3182bd', '#08519c'],
     purpleScheme = ['#bfd3e6', '#9ebcda', '#8c96c6', '#8c6bb1', '#88419d', '#6e016b'],
     greenredScheme = ['#7fcdbb', '#c7e9b4','#ffffcc','#fdae61', '#ff3c3c', '#990000'],
-    regressionColors = ['#a10000', '#ac8500', '#00eb10', '#00eb10', '#00a3fe', '#6600a1'];
+    regressionColors = ['#6600a1', '#00a3fe', '#00eb10', '#00eb10', '#00a3fe', '#6600a1'];
 
 //default style
 
