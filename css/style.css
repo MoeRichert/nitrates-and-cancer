@@ -19,6 +19,11 @@
 	margin: 15px auto;
 	}
 
+#logoimg{
+          height:10%;
+          min-height: 50px;  
+      }
+
 
 #map {
     position:absolute;
