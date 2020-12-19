@@ -142,7 +142,7 @@
 .about {
   display: none; 
   position: fixed; 
-  z-index: 801; 
+  z-index: 1001; 
   padding-top: 10%; 
   left: 0;
   top: 0;
